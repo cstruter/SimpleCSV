@@ -54,14 +54,19 @@ namespace ClassLibrary1
             TestCaseSource("FirstLastNameScenario")]
         public void GetFrequencyList_Given_MultipleTestCases(List<Customer> customers, string expected)
         {
+            // Arrange
             var customerRepository = Substitute.For<ICustomerRepository>();
             customerRepository.GetCustomers().Returns(customers);
             var customerBusinessRules = new CustomerService(customerRepository);
+
+            // Act
             var items = customerBusinessRules.GetFrequencyList();
             var list = new List<string>();
             foreach (var item in items)
                 list.Add(item);
             var actual = string.Join(",", list.ToArray());
+
+            // Assert
             StringAssert.AreEqualIgnoringCase(expected, actual);
         }
 
@@ -69,14 +74,19 @@ namespace ClassLibrary1
             TestCaseSource("AddressListTakeStreetNumberInAccountSorting")]
         public void GetSortedAddressList_Given_MultipleTestCases(List<Customer> customers, string expected)
         {
+            // Arrange
             var customerRepository = Substitute.For<ICustomerRepository>();
             customerRepository.GetCustomers().Returns(customers);
             var customerBusinessRules = new CustomerService(customerRepository);
+
+            // Act
             var items = customerBusinessRules.GetSortedAddressList();
             var list = new List<string>();
             foreach (var item in items)
                 list.Add(item);
             var actual = string.Join(",", list.ToArray());
+
+            // Assert
             StringAssert.AreEqualIgnoringCase(expected, actual);
         }
     }

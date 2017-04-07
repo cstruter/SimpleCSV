@@ -36,11 +36,16 @@ namespace CSTruter.TestLibrary
             TestCaseSource("ObjectMappingTestSource")]
         public void ToObjectList_Given_MultipleTestCases(string[] lines, string expected)
         {
+            // Arrange
             var reader = Substitute.For<ICommaSeparatedValueReader>();
             reader.GetLines().Returns(lines);
             var parser = new CommaSeparatedValueParser(reader, ',');
+
+            // Act
             var customers = parser.ToObjectList<Customer>();
             var actual = CustomersToString(customers);
+
+            // Assert
             StringAssert.AreEqualIgnoringCase(expected, actual);
         }
 
@@ -48,10 +53,14 @@ namespace CSTruter.TestLibrary
             TestCaseSource("ObjectMappingTestSourceLessColumnsOrFields")]
         public void ToObjectList_Given_LessColumnsOrFields_ShowThrowException(string[] lines)
         {
+            // Arrange
             var reader = Substitute.For<ICommaSeparatedValueReader>();
             reader.GetLines().Returns(lines);
             var parser = new CommaSeparatedValueParser(reader, ',');
+
+            // Assert
             Assert.Throws<CommaSeparatedValueException>(() => {
+                // Act
                 parser.ToObjectList<Customer>();
             });
         }
