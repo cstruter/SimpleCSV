@@ -20,6 +20,10 @@ own as part of an assessment exercize.
 
 Rudimentary but functioning.
 
+I wrote a custom object mapper as well - ideally something that should be
+moved out as well as it can be reused, but currently its tightly coupled
+with the CSV parser itself.
+
 ### CSTruter.Repositories
 I used the general repository pattern, this makes it easy to swop out
 the data strategy should the developer decide to fetch data from elsewhere
