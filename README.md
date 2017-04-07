@@ -30,6 +30,7 @@ This contains the basic logic for querying the CSV results.
 
 ## #CSTruter.TestLibrary
 I used NUnit for test cases and NSubstitute to mock out - nuget used for package
-management.
+management. Testing around some (not all) boundary cases, TestCaseSources used for
+more complex data types.
 
 ![alt tag](http://cstruter.com/uploads/tdd.jpg)
