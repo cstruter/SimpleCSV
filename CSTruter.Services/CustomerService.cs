@@ -24,9 +24,7 @@ namespace CSTruter.Services
         public IEnumerable<string> GetFrequencyList()
         {
             var data = _customerRepository.GetCustomers();
-            if (data == null)
-                return null;
-            return data.Select(c => c.FirstName).Concat(data.Select(c => c.LastName))
+            return data?.Select(c => c.FirstName).Concat(data.Select(c => c.LastName))
                 .GroupBy(c => c)
                 .Select(c => new { Name = c.Key, Count = c.Count() })
                 .OrderByDescending(c => c.Count)
@@ -41,9 +39,7 @@ namespace CSTruter.Services
         public IEnumerable<string> GetSortedAddressList()
         {
             var data = _customerRepository.GetCustomers();
-            if (data == null)
-                return null;
-            return data.Select(c => new { c.StreetNumber, c.Address })
+            return data?.Select(c => new { c.StreetNumber, c.Address })
                 .OrderBy(c => c.Address)
                 .ThenBy(c=> c.StreetNumber)
                 .Select(c => $"{c.StreetNumber} {c.Address}");
